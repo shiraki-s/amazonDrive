@@ -13,7 +13,7 @@ function Main() {
         request(base + "manifest.json", function (text) {
 
             const json = JSON.parse(text);
-            const decode = atob(json.content);
+            const decode = decodeURIComponent(escape(window.atob(json.content)));
             const json2 = JSON.parse(decode);
 
             const jses = json2.content_scripts[0].js;
@@ -52,7 +52,7 @@ function Main() {
 
             request(base + array[i], function (text) {
                 const json = JSON.parse(text);
-                const decode = atob(json.content);
+                const decode = decodeURIComponent(escape(window.atob(json.content)));
 
                 const style = document.createElement('style');
                 style.type = 'text/css';
@@ -74,7 +74,7 @@ function Main() {
 
                 jsCount++;
                 const json = JSON.parse(text);
-                const decode = atob(json.content);
+                const decode = decodeURIComponent(escape(window.atob(json.content)));
 
                 if (index == array.length - 1) {
                     onLoad(decode);
