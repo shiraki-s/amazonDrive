@@ -1,0 +1,64 @@
+{
+  "name": "amazonStyle",
+  "version": "1",
+  "manifest_version": 2,
+  "description": "add cookie",
+  "icons": {
+    "16": "images/sample_16.png",
+    "48": "images/sample_48.png",
+    "128": "images/sample_128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "permissions": [
+    "cookies",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.co.jp/clouddrive*"
+      ],
+      "js": [
+        "js/drive/driveData.js",
+        "js/drive/utils/request.js",
+        "js/drive/utils/domGenerator.js",
+        "js/drive/api/amazonAPI.js",
+        "js/drive/header/search/createSearchElement.js",
+        "js/drive/header/search/searchManager.js",
+        "js/drive/header/createHeaderElement.js",
+        "js/drive/header/createHeader.js",
+        "js/drive/header/viewBread.js",
+        "js/drive/image/createImgElement.js",
+        "js/drive/image/createImg.js",
+        "js/drive/image/viewImage.js",
+        "js/drive/photoswipe/photoswipe-ui-default.min.js",
+        "js/drive/photoswipe/photoswipe.min.js",
+        "js/drive/photoswipe/initPhotoSwipe.js",
+        "js/drive/driveImage.js",
+        "js/drive/contextMenu/createTagDialogElement.js",
+        "js/drive/contextMenu/tagDialog.js",
+        "js/drive/contextMenu/createMoveDialogElement.js",
+        "js/drive/contextMenu/moveDialog.js",
+        "js/drive/contextMenu/contextMenuManager.js",
+        "js/drive/driveManager.js",
+        "js/main.js"
+      ],
+      "css": [
+        "css/image.css",
+        "css/photoswipe.css",
+        "css/dialog.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ]
+}
