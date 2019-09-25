@@ -122,7 +122,7 @@ function DriveImage(driveData) {
 
     function refreshToken(callback) {
 
-        amazonAPI.getAuthToken(function () {
+        amazonAPI.getAuthToken(function (token) {
             driveData.setAuthToken(token);
             driveData.setAuthTokenLimit();
             callback();
