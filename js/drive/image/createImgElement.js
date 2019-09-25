@@ -2,7 +2,7 @@
 function CreateImgElement(driveData) {
 
     const generator = new DomGenerator();
-    const FOLDER = "https://user-images.githubusercontent.com/23305275/65570932-cf29e680-df9d-11e9-91b5-0ed40d36ee27.jpg";
+    const FOLDER = "https://user-images.githubusercontent.com/23305275/65571175-b837c400-df9e-11e9-94e7-ef79c108c642.jpg";
     const FILE = "https://user-images.githubusercontent.com/23305275/65570975-f84a7700-df9d-11e9-872e-22302e3ef4cc.jpg";
 
     this.createFolder = function (file, length) {
