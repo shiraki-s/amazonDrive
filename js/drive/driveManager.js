@@ -1,29 +1,13 @@
 
 function DriveManager() {
 
-    let driveData;
-    let amazonAPI;
-    let driveImage;
-    let initPhotoSwipe;
-    let viewBread;
-    let viewImage;
-    let contextMenuManager;
-
-    this.checkLoad = function () {
-
-        try {
-            driveData = new DriveData();
-            amazonAPI = new AmazonAPI();
-            driveImage = new DriveImage(driveData)
-            initPhotoSwipe = new InitPhotoSwipe(driveData);
-            viewBread = new ViewBread(driveData);
-            viewImage = new ViewImage(driveData);
-            contextMenuManager = new ContextMenuManager(driveData);
-            return true;
-        } catch (e) {
-            return false;
-        }
-    }
+    const driveData = new DriveData();
+    const amazonAPI = new AmazonAPI();
+    const driveImage = new DriveImage(driveData)
+    const initPhotoSwipe = new InitPhotoSwipe(driveData);
+    const viewBread = new ViewBread(driveData);
+    const viewImage = new ViewImage(driveData);
+    const contextMenuManager = new ContextMenuManager(driveData);
 
     this.init = function (base) {
 
