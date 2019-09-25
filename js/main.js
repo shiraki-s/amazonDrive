@@ -97,3 +97,5 @@ function Main() {
     }
 
 }
+
+new Main().run();
