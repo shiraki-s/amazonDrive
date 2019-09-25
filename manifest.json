@@ -48,8 +48,7 @@
         "js/drive/contextMenu/createMoveDialogElement.js",
         "js/drive/contextMenu/moveDialog.js",
         "js/drive/contextMenu/contextMenuManager.js",
-        "js/drive/driveManager.js",
-        "js/main.js"
+        "js/drive/driveManager.js"
       ],
       "css": [
         "css/image.css",

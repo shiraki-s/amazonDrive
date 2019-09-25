@@ -1,101 +1,114 @@
-
 function Main() {
+
+    let jsCount = 0;
 
     this.run = function () {
         run();
-
-        var script = document.createElement('script');
-        script.innerHTML = 'console.log("オラオラ")';
-        document.body.appendChild(script);
     }
 
     function run() {
 
-        const url = "https://us-central1-blog-reader-1371.cloudfunctions.net/amazonDrive?type=manifest";
-        let request;
+        const base = "https://api.github.com/repos/shiraki-s/amazonDrive/contents/";
 
-        try {
-            request = new HttpRequest();
-        } catch (e) {
+        request(base + "manifest.json", function (text) {
 
-            setTimeout(function () {
-                run();
-            }, 500);
-
-            return;
-        }
-
-        request.request(url, { method: "GET", responseType: "text" }, function (error, text) {
-
-            console.log(text);
             const json = JSON.parse(text);
-            console.log(json);
+            const decode = atob(json.content);
+            const json2 = JSON.parse(decode);
 
-            const jses = json.text.content_scripts[0].js;
-            const csses = json.text.content_scripts[0].css;
-            const base = "https://upbeat-mclean-30103c.netlify.com/";
+            const jses = json2.content_scripts[0].js;
+            const csses = json2.content_scripts[0].css;
             createCssTag(base, csses);
 
-            createJsTag(base, jses, function () {
-                init(base);
+            createJsTag(base, jses, function (script) {
+                init(base, script, jses.length);
             });
         });
 
     }
 
-    function init(base) {
+    function init(base, script, max) {
 
-        try {
-            const manager = new DriveManager();
+        setTimeout(function () {
 
-            if (manager.checkLoad()) {
-                manager.init(base);
-                return;
+            if (max == jsCount) {
+
+                const s = document.createElement('script');
+                s.innerHTML = script + ' new DriveManager().init("' + base + '");';
+                document.body.appendChild(s);
+
+            } else {
+                init(base, script, max);
             }
 
-            setTimeout(function () { init(base) }, 500);
 
-        } catch (e) {
-            setTimeout(function () { init(base) }, 500);
-        }
+        }, 500);
+
     }
 
     function createCssTag(base, array) {
 
-        const fragment = document.createDocumentFragment();
-
         for (let i = 0, len = array.length; i < len; i++) {
 
-            const l = document.createElement('link');
-            l.rel = 'stylesheet';
-            l.href = base + "/" + array[i];
-            l.type = 'text/css';
-            fragment.appendChild(l);
+            request(base + array[i], function (text) {
+                const json = JSON.parse(text);
+                const decode = atob(json.content);
+
+                const style = document.createElement('style');
+                style.type = 'text/css';
+                style.innerHTML = decode;
+                document.body.appendChild(style);
+            });
+
         }
 
-        document.body.appendChild(fragment);
     }
 
     function createJsTag(base, array, onLoad) {
 
-        const fragment = document.createDocumentFragment();
-
         for (let i = 0, len = array.length; i < len; i++) {
 
-            const s = document.createElement('script');
-            s.src = base + "/" + array[i];
-            s.async = false;
-            fragment.appendChild(s);
+            const index = i;
 
-            if (i == array.length - 1) {
-                s.onload = onLoad;
-            }
+            request(base + array[i], function (text) {
+
+                jsCount++;
+                const json = JSON.parse(text);
+                const decode = atob(json.content);
+
+                if (index == array.length - 1) {
+                    onLoad(decode);
+                    return;
+                }
+
+                const s = document.createElement('script');
+                s.innerHTML = decode;
+                document.body.appendChild(s);
+            });
+
         }
 
-        document.body.appendChild(fragment);
+    }
 
+    function request(url, callback) {
+
+        var request = new XMLHttpRequest();
+
+        request.onreadystatechange = function () {
+
+            if (request.readyState == 4) {
+
+                if (request.status == 200) {
+                    callback(request.responseText);
+                    return;
+                }
+            }
+
+        }
+
+        request.open("GET", url, true);
+        request.send();
     }
 
 }
 
-new Main().run();
