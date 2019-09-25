@@ -5,12 +5,18 @@ function DriveImage(driveData) {
 
     this.getImages = function (id, callback) {
 
+        const filter = 'parents:' + id + ' AND kind:(FILE* OR FOLDER*)';
+
         if (isAuthTokenLimit()) {
-            location.reload();
+
+            refreshToken(function () {
+                getImages(filter, callback);
+            });
+
+            // location.reload();
             return;
         }
 
-        const filter = 'parents:' + id + ' AND kind:(FILE* OR FOLDER*)';
         getImages(filter, callback);
 
     }
@@ -18,7 +24,11 @@ function DriveImage(driveData) {
     this.searchImages = function (filter, callback) {
 
         if (isAuthTokenLimit()) {
-            location.reload();
+
+            refreshToken(function () {
+                getImages(filter, callback);
+            });
+            // location.reload();
             return;
         }
 
@@ -29,34 +39,49 @@ function DriveImage(driveData) {
 
     this.getAllImages = function (callback) {
 
+        const filter = "kind:FILE";
+
         if (isAuthTokenLimit()) {
-            location.reload();
+
+            refreshToken(function () {
+                getImages(filter, callback);
+            });
+            // location.reload();
             return;
         }
 
-        const filter = "kind:FILE";
         getImages(filter, callback);
 
     }
 
     this.getFirstFile = function (id, callback) {
 
+        const filter = 'parents:' + id + ' AND kind:(FILE* OR FOLDER*)';
+
         if (isAuthTokenLimit()) {
-            location.reload();
+
+            refreshToken(function () {
+                getImages(filter, callback);
+            });
+            // location.reload();
             return;
         }
 
-        const filter = 'parents:' + id + ' AND kind:(FILE* OR FOLDER*)';
         getFirstFile(filter, callback);
     }
 
     this.deleteFile = function (id, callback) {
 
+
         if (isAuthTokenLimit()) {
-            location.reload();
+
+            refreshToken(function () {
+                const authToken = driveData.getAuthToken();
+                amazonAPI.deleteFile(authToken, id, callback);
+            });
+            // location.reload();
             return;
         }
-
 
         const authToken = driveData.getAuthToken();
         amazonAPI.deleteFile(authToken, id, callback);
@@ -65,7 +90,12 @@ function DriveImage(driveData) {
     this.moveFile = function (id, parentId, toParentId, callback) {
 
         if (isAuthTokenLimit()) {
-            location.reload();
+            // location.reload();
+            refreshToken(function () {
+                const authToken = driveData.getAuthToken();
+                amazonAPI.moveFile(authToken, id, parentId, toParentId, callback);
+            });
+
             return;
         }
 
@@ -76,13 +106,28 @@ function DriveImage(driveData) {
     this.changeMetadata = function (id, querys, callback) {
 
         if (isAuthTokenLimit()) {
-            location.reload();
+            // location.reload();
+            refreshToken(function () {
+                const authToken = driveData.getAuthToken();
+                amazonAPI.changeMetadata(authToken, id, querys, callback);
+            });
+
             return;
         }
 
 
         const authToken = driveData.getAuthToken();
         amazonAPI.changeMetadata(authToken, id, querys, callback);
+    }
+
+    function refreshToken(callback) {
+
+        amazonAPI.getAuthToken(function () {
+            driveData.setAuthToken(token);
+            driveData.setAuthTokenLimit();
+            callback();
+        });
+
     }
 
     function getImages(filter, callback) {
