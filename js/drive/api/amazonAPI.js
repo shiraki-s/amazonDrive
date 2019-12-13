@@ -140,14 +140,60 @@ function AmazonAPI() {
 
     function getAuthUrl() {
 
+        return "https://www.amazon.co.jp/clouddrive/auth/token?mgh=1";
 
-        const src = document.getElementsByTagName("html")[0].innerHTML;
-        let url = src.substring(src.indexOf("authportalUrl") + 16, src.length);
-        url = url.substring(0, url.indexOf('"'));
+        // const src = document.getElementsByTagName("html")[0].innerHTML;
+        // let url = src.substring(src.indexOf("authportalUrl") + 16, src.length);
+        // url = url.substring(0, url.indexOf('"'));
 
-        return url;
+        // return url;
     }
 
+    // function getFilesByOffset(authToken, id, json, callback) {
+
+    //     const url = "https://www.amazon.co.jp/drive/v1/nodes/";
+
+
+    //     var j = {
+    //         'resourceVersion': 'V2',
+    //         'ContentType': 'JSON',
+    //         'asset': 'ALL',
+    //         'limit': '200',
+    //         'offset': json.data.length,
+    //         'sort': '["kind DESC","name ASC"]',
+    //         'tempLink': 'true',
+    //         'filters': 'parents:' + id + ' AND kind:(FILE* OR FOLDER*)'
+    //     };
+
+    //     const param = {
+    //         method: "GET",
+    //         headers: [
+    //             { name: "Content-Type", value: "application/Json" },
+    //             { name: "Authorization", value: "Bearer " + authToken }
+    //         ],
+    //         responseType: "text"
+    //     }
+
+    //     httpRequest.request(createUrl(url, j), param, function (error, text) {
+
+    //         if (error) {
+    //             console.log(error);
+    //             callback(null);
+    //             return;
+    //         }
+
+    //         const resJson = JSON.parse(text);
+
+    //         Array.prototype.push.apply(json.data, resJson.data);
+
+    //         if (json.data.length < json.count) {
+    //             getFilesByOffset(authToken, id, json, callback);
+    //         } else {
+    //             callback(json);
+    //         }
+
+    //     });
+    // }
 
     function getFiles(authToken, filter, callback) {
 
@@ -200,7 +246,7 @@ function AmazonAPI() {
             'ContentType': 'JSON',
             'asset': 'ALL',
             'limit': '200',
-            'nextToken': nextToken,
+            'startToken': nextToken,
             // 'offset': json.data.length,
             'sort': '["kind DESC","name ASC"]',
             'tempLink': 'true',

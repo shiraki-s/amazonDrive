@@ -6,14 +6,16 @@ function DriveManager() {
     const driveImage = new DriveImage(driveData)
     const initPhotoSwipe = new InitPhotoSwipe(driveData);
     const viewBread = new ViewBread(driveData);
+    const footerManager = new FooterManager(driveData);
     const viewImage = new ViewImage(driveData);
+    const downloadImage = new DownloadImage(driveData, new ProgressManager());
     const contextMenuManager = new ContextMenuManager(driveData);
 
-    this.init = function (base) {
+    this.init = function () {
 
         initBread(function () {
-            driveData.setBase(base);
             initView();
+            footerManager.init();
 
             const id = driveData.getNowDir();
 
@@ -76,6 +78,13 @@ function DriveManager() {
             viewImages(file.id, function () {
                 viewBread.view();
             });
+
+        }, function (file) {
+
+            downloadImage.download(file, function () {
+
+            });
+
         });
     }
 

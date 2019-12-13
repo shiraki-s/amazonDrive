@@ -24,11 +24,21 @@ function HttpRequest(timeout) {
                         return;
                     }
 
+                    if (request.responseType == "arraybuffer") {
+                        callback(null, request.response);
+                        return;
+                    }
+
                     try {
 
                         const json = JSON.parse(request.responseText);
 
                         if (json.httpStatus && json.httpStatus == 200) {
+                            callback(null, json);
+                            return;
+                        }
+
+                        if (request.status == 200 && json) {
                             callback(null, json);
                             return;
                         }
@@ -79,6 +89,10 @@ function HttpRequest(timeout) {
             setHeaders(request, params.headers);
         }
 
+        if (params.responseType) {
+            request.responseType = params.responseType;
+        }
+
         if (params.contentType == "application/json") {
             // console.log(params.querys);
             request.send(params.querys);
@@ -88,10 +102,6 @@ function HttpRequest(timeout) {
         if (params.contentType == "application/octet-stream") {
             request.send(params.binary);
             return;
-        }
-
-        if (params.responseType) {
-            request.responseType = params.responseType;
         }
 
         if (params.method == "GET") {

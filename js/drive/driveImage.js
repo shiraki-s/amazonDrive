@@ -169,7 +169,6 @@ function DriveImage(driveData) {
                     j.data[i].originalUrl = createRedirectUrl(j.data[i].id, 0);
                 }
 
-                console.log(j);
                 callback(j);
             }
         });

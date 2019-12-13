@@ -3,9 +3,11 @@ function ViewImage(driveData) {
 
     const createImg = new CreateImg(driveData);
     let clickCallback;
+    let tapCallback;
 
-    this.init = function (_clickCallback) {
+    this.init = function (_clickCallback, _tapCallback) {
         clickCallback = _clickCallback;
+        tapCallback = _tapCallback;
         clearStyle();
         calcImageSize();
         initViewContainer();
@@ -14,6 +16,7 @@ function ViewImage(driveData) {
     this.view = function (data) {
 
         const el = document.getElementsByClassName("loading-transition")[0];
+        removeList();
         clearViewContainer();
 
         const length = driveData.getElementLength();
@@ -60,6 +63,16 @@ function ViewImage(driveData) {
 
     }
 
+    function removeList() {
+
+        const el = document.getElementsByClassName("loading-transition")[0];
+        const list = el.getElementsByClassName("infinite-scroll-list");
+
+        if (list.length != 0) {
+            el.removeChild(list[0]);
+        }
+    }
+
     function createImageElement(files, length) {
 
         const folderFragment = document.createDocumentFragment();
@@ -69,7 +82,7 @@ function ViewImage(driveData) {
 
         for (let i = 0, len = files.length; i < len; i++) {
 
-            const element = createImg.create(files[i], length, clickCallback);
+            const element = createImg.create(files[i], length, clickCallback, tapCallback);
 
             if (!element) {
                 continue;
@@ -144,6 +157,9 @@ function ViewImage(driveData) {
     }
 
     function clearStyle() {
+
+        const el = document.getElementsByClassName("loading-transition")[0];
+        el.textContent = null;
 
         const nav = document.getElementsByClassName("side-nav-wrapper")[0];
 

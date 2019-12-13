@@ -1,5 +1,5 @@
 
-function CreateImgElement(driveData) {
+function CreateImgElement() {
 
     const generator = new DomGenerator();
     const FOLDER = "https://user-images.githubusercontent.com/23305275/65571175-b837c400-df9e-11e9-94e7-ef79c108c642.jpg";
@@ -39,6 +39,45 @@ function CreateImgElement(driveData) {
         element.style.height = length + "px";
         return element;
 
+    }
+
+    this.createApngImage = function (file, length) {
+
+        const wh = file.contentProperties.image;
+        const size = wh.width + "x" + wh.height;
+
+        const img = generator.create({
+            tagName: "img",
+            attributes: [
+                { name: "src", value: file.originalUrl },
+                { name: "alt", value: file.name },
+                { name: "width", value: length },
+            ],
+        });
+
+        const a = generator.create({
+            tagName: "a",
+            attributes: [
+                { name: "href", value: file.originalUrl },
+                { name: "data-size", value: size }
+            ],
+            children: [img]
+        });
+
+        const caption = generator.create({
+            tagName: "figcaption",
+            text: file.name
+        });
+
+        const element = generator.create({
+            tagName: "figure",
+            classes: ["element"],
+            children: [a, caption]
+        });
+
+        element.style.width = length + "px";
+        element.style.height = length + "px";
+        return element;
     }
 
     this.createImage = function (file, length) {

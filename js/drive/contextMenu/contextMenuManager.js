@@ -1,9 +1,12 @@
 
 function ContextMenuManager(driveData) {
 
+    const progressManager = new ProgressManager();
     const driveImage = new DriveImage(driveData);
     const moveDialog = new MoveDialog(driveData);
     const tagDialog = new TagDialog(driveData);
+    const uploadGoogle = new UploadGoogle(driveData, progressManager);
+    const downloadImage = new DownloadImage(driveData, progressManager);
     let deleteCallback;
     let changeNameCallback;
 
@@ -12,6 +15,7 @@ function ContextMenuManager(driveData) {
         deleteCallback = _deleteCallback;
         changeNameCallback = _changeNameCallback;
         createDom(_moveCallback, _changeTagCallback);
+        progressManager.init();
 
         document.addEventListener("contextmenu", function (e) {
 
@@ -76,6 +80,16 @@ function ContextMenuManager(driveData) {
         tag.textContent = "タグ追加";
         initChangeTag(tag);
         ul.appendChild(tag);
+
+        const upload = document.createElement("li");
+        upload.textContent = "googlePhotoにアップロード";
+        initUpload(upload);
+        ul.appendChild(upload);
+
+        const download = document.createElement("li");
+        download.textContent = "ダウンロード"
+        initDownload(download);
+        ul.appendChild(download);
 
         div.appendChild(ul);
         div.id = "contextmenu";
@@ -162,6 +176,32 @@ function ContextMenuManager(driveData) {
 
         li.addEventListener("click", function () {
             tagDialog.view();
+        });
+
+    }
+
+    function initUpload(li) {
+
+        li.addEventListener("click", function () {
+            const id = driveData.getMouseOverFileId();
+            const file = getFile(id);
+
+            uploadGoogle.uploadImage(file, function () {
+                console.log("完了");
+            });
+        });
+
+    }
+
+    function initDownload(li) {
+
+        li.addEventListener("click", function () {
+            const id = driveData.getMouseOverFileId();
+            const file = getFile(id);
+
+            downloadImage.download(file, function () {
+                console.log("完了");
+            });
         });
 
     }

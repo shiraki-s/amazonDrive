@@ -29,13 +29,28 @@
       "js": [
         "js/drive/driveData.js",
         "js/drive/utils/request.js",
+        "js/drive/utils/FileSaver.min.js",
+        "js/drive/utils/jszip.min.js",
+        "js/drive/utils/downloader.js",
         "js/drive/utils/domGenerator.js",
+        "js/drive/utils/convert/resizeImg.js",
+        "js/drive/utils/convert/worker.js",
+        "js/drive/utils/convert/convertImg.js",
+        "js/drive/utils/convert/imgCryptor.js",
+        "js/drive/utils/hashids.min.js",
+        "js/drive/utils/progressbar.min.js",
+        "js/drive/utils/progressManager.js",
+        "js/googlePhoto/googleOauthAPI.js",
+        "js/googlePhoto/googleDriveAPI.js",
+        "js/googlePhoto/googlePhotoAPI.js",
         "js/drive/api/amazonAPI.js",
         "js/drive/header/search/createSearchElement.js",
         "js/drive/header/search/searchManager.js",
         "js/drive/header/createHeaderElement.js",
         "js/drive/header/createHeader.js",
         "js/drive/header/viewBread.js",
+        "js/drive/footer/footerManager.js",
+        "js/drive/image/downloadImage.js",
         "js/drive/image/createImgElement.js",
         "js/drive/image/createImg.js",
         "js/drive/image/viewImage.js",
@@ -43,17 +58,21 @@
         "js/drive/photoswipe/photoswipe.min.js",
         "js/drive/photoswipe/initPhotoSwipe.js",
         "js/drive/driveImage.js",
+        "js/drive/contextMenu/uploadGoogle.js",
         "js/drive/contextMenu/createTagDialogElement.js",
         "js/drive/contextMenu/tagDialog.js",
         "js/drive/contextMenu/createMoveDialogElement.js",
         "js/drive/contextMenu/moveDialog.js",
         "js/drive/contextMenu/contextMenuManager.js",
-        "js/drive/driveManager.js"
+        "js/drive/driveManager.js",
+        "js/main.js"
       ],
       "css": [
         "css/image.css",
         "css/photoswipe.css",
-        "css/dialog.css"
+        "css/dialog.css",
+        "css/footer.css",
+        "css/progress.css"
       ]
     }
   ],

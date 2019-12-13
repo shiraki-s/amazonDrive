@@ -2,7 +2,6 @@
 
 function DriveData() {
 
-    let base;
     let pswp;
     let nowDir;
     let preDir;
@@ -14,15 +13,8 @@ function DriveData() {
     let elementWidth;
     let elementLength;
     let isKeyEvent;
+    let isDownloadMode;
     let mouseOverFileId;
-
-    this.setBase = function (_base) {
-        base = _base;
-    }
-
-    this.getBase = function () {
-        return base;
-    }
 
     this.setPswp = function (_pswp) {
         pswp = _pswp;
@@ -165,6 +157,14 @@ function DriveData() {
 
     this.getMouseOverFileId = function () {
         return mouseOverFileId;
+    }
+
+    this.isDownloadMode = function () {
+        return isDownloadMode;
+    }
+
+    this.setDownloadMode = function (_isDownloadMode) {
+        isDownloadMode = _isDownloadMode;
     }
 
 }
