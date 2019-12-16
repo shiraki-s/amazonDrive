@@ -102,34 +102,27 @@ function CreateImg(driveData) {
         let interval;
 
         element.addEventListener("touchstart", function (e) {
+            e.preventDefault();
 
-            if (driveData.isDownloadMode()) {
+            let time = 0;
 
-                e.preventDefault();
+            interval = setInterval(function () {
 
-                let time = 0;
+                time += 100;
 
-                interval = setInterval(function () {
+                if (time > holdtime) {
+                    callback(file);
+                    clearInterval(interval);
+                }
 
-                    time += 100;
+            }, 100);
 
-                    if (time > holdtime) {
-                        callback(file);
-                        clearInterval(interval);
-                    }
-
-                }, 100);
-
-            }
 
         });
 
         element.addEventListener("touchend", function (e) {
-
-            if (driveData.isDownloadMode()) {
-                e.preventDefault();
-                clearInterval(interval);
-            }
+            e.preventDefault();
+            clearInterval(interval);
         });
 
     }

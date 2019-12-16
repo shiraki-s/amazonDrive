@@ -20,21 +20,8 @@ function ContextMenuManager(driveData) {
         document.addEventListener("contextmenu", function (e) {
 
             e.preventDefault();
+            createMenu();
 
-            const menu = document.getElementById('contextmenu');
-            const dialog = document.getElementById("tagModal");
-
-            if (driveData.isKeyEvent() || !driveData.getMouseOverFileId() ||
-                isExistClass(dialog.classList, "modal_on")) {
-                menu.style.display = "none";
-                menu.classList.remove("menu_on");
-                return;
-            }
-
-            menu.style.left = e.pageX + "px";
-            menu.style.top = e.pageY - window.pageYOffset + "px";
-            menu.style.display = "block";
-            menu.classList.add("menu_on");
             return;
 
         });
@@ -53,6 +40,25 @@ function ContextMenuManager(driveData) {
             }
 
         });
+
+    }
+
+    function createMenu() {
+
+        const menu = document.getElementById('contextmenu');
+        const dialog = document.getElementById("tagModal");
+
+        if (driveData.isKeyEvent() || !driveData.getMouseOverFileId() ||
+            isExistClass(dialog.classList, "modal_on")) {
+            menu.style.display = "none";
+            menu.classList.remove("menu_on");
+            return;
+        }
+
+        menu.style.left = e.pageX + "px";
+        menu.style.top = e.pageY - window.pageYOffset + "px";
+        menu.style.display = "block";
+        menu.classList.add("menu_on");
 
     }
 

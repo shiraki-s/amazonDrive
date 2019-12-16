@@ -7,11 +7,11 @@ function FooterManager(driveData) {
 
     this.init = function () {
 
-        if (isTablet()) {
-            initDom();
-            const footer = document.getElementsByTagName("footer")[0];
-            initDownloadButtion(footer);
-        }
+        // if (isTablet()) {
+            // initDom();
+            // const footer = document.getElementsByTagName("footer")[0];
+            // initDownloadButtion(footer);
+        // }
     }
 
     function initDom() {
