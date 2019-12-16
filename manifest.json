@@ -34,7 +34,6 @@
         "js/drive/utils/downloader.js",
         "js/drive/utils/domGenerator.js",
         "js/drive/utils/convert/resizeImg.js",
-        "js/drive/utils/convert/worker.js",
         "js/drive/utils/convert/convertImg.js",
         "js/drive/utils/convert/imgCryptor.js",
         "js/drive/utils/hashids.min.js",
