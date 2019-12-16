@@ -22,7 +22,7 @@ function DownloadImage(driveData, progressManager) {
                 }
 
                 const blob = new Blob([imageData], { type: "image/" + extention });
-                saveAs(blob, results[0].name);
+                saveAs(blob, results[0].name, { type: "image/" + extention });
                 callback();
             });
 
@@ -86,7 +86,7 @@ function DownloadImage(driveData, progressManager) {
         zip.generateAsync({ type: "blob" })
             .then(function (content) {
                 // see FileSaver.js
-                saveAs(content, name + ".zip");
+                saveAs(content, name + ".zip", { type: "application/zip" });
             });
     }
 
