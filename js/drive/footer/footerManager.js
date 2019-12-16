@@ -9,7 +9,7 @@ function FooterManager(driveData) {
 
         // if (isTablet()) {
             initDom();
-            const footer = document.getElementsByTagName("footer")[0];
+            const footer = document.getElementsByClassName("footer-buttons")[0];
             initDownloadButtion(footer);
         // }
     }
