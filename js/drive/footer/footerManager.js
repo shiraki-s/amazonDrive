@@ -7,11 +7,11 @@ function FooterManager(driveData) {
 
     this.init = function () {
 
-        // if (isTablet()) {
+        if (isTablet()) {
             initDom();
             const footer = document.getElementsByTagName("footer")[0];
             initDownloadButtion(footer);
-        // }
+        }
     }
 
     function initDom() {
@@ -23,7 +23,7 @@ function FooterManager(driveData) {
         button1.classList.add("button_dl");
 
         const img1 = document.createElement("img");
-        img1.src = chrome.extension.getURL('images/download.png');
+        img1.src = DOWNLOAD_PATH;
         button1.appendChild(img1);
 
         footer.appendChild(button1);
