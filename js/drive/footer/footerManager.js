@@ -8,15 +8,16 @@ function FooterManager(driveData) {
     this.init = function () {
 
         // if (isTablet()) {
-            // initDom();
-            // const footer = document.getElementsByTagName("footer")[0];
-            // initDownloadButtion(footer);
+            initDom();
+            const footer = document.getElementsByTagName("footer")[0];
+            initDownloadButtion(footer);
         // }
     }
 
     function initDom() {
 
-        const footer = document.createElement("footer");
+        const footer = document.createElement("div");
+        footer.classList.add("footer-buttons")
 
         const button1 = document.createElement("button");
         button1.classList.add("footer_button");
