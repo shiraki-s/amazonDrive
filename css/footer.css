@@ -14,7 +14,7 @@
     height: 100%;
 }
 
-div .footer-buttons {
+footer .footer-buttons {
     position: fixed;
     bottom: 0;
     width: 100%;
