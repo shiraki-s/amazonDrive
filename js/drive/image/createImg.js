@@ -1,7 +1,7 @@
 
 function CreateImg(driveData) {
 
-    const createImgElement = new CreateImgElement();
+    const createImgElement = new CreateImgElement(driveData);
     const driveImage = new DriveImage(driveData);
 
     this.create = function (file, length, clickCallback, tapCallback) {

@@ -8,6 +8,7 @@ function DriveData() {
     let nowDirName;
     let firstImages = {};
     let cashes = {};
+    let imageSrcs = [];
     let authToken;
     let authTokenLimit;
     let elementWidth;
@@ -165,6 +166,24 @@ function DriveData() {
 
     this.setDownloadMode = function (_isDownloadMode) {
         isDownloadMode = _isDownloadMode;
+    }
+
+    this.setImageSrcs = function (_imageSrcs) {
+        imageSrcs = _imageSrcs;
+    }
+
+    this.getImageSrc = function (name) {
+
+        for (let i = 0, len = imageSrcs.length; i < len; i++) {
+
+            if (imageSrcs[i].name == name) {
+                return imageSrcs[i];
+            }
+
+        }
+
+        return "";
+
     }
 
 }

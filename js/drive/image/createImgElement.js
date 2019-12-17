@@ -1,16 +1,16 @@
 
-function CreateImgElement() {
+function CreateImgElement(driveData) {
 
     const generator = new DomGenerator();
-    const FOLDER = "https://user-images.githubusercontent.com/23305275/65571175-b837c400-df9e-11e9-94e7-ef79c108c642.jpg";
-    const FILE = "https://user-images.githubusercontent.com/23305275/65570975-f84a7700-df9d-11e9-872e-22302e3ef4cc.jpg";
+    const FOLDER = "folder.jpg";
+    const FILE = "file.jpg";
 
     this.createFolder = function (file, length) {
 
         const img = generator.create({
             tagName: "img",
             attributes: [
-                { name: "src", value: FOLDER },
+                { name: "src", value: driveData.getImageSrc(FOLDER) },
                 { name: "width", value: length }
             ]
         });
@@ -123,7 +123,7 @@ function CreateImgElement() {
         const img = generator.create({
             tagName: "img",
             attributes: [
-                { name: "src", value: FILE },
+                { name: "src", value: driveData.getImageSrc(FILE) },
                 { name: "width", value: length }
             ]
         });
