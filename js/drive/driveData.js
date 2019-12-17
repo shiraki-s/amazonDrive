@@ -177,7 +177,7 @@ function DriveData() {
         for (let i = 0, len = imageSrcs.length; i < len; i++) {
 
             if (imageSrcs[i].name == name) {
-                return imageSrcs[i];
+                return imageSrcs[i].src;
             }
 
         }
