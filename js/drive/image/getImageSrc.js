@@ -7,6 +7,8 @@ function GetImageSrc(driveData) {
     this.init = function (callback) {
 
         driveImage.searchImages(FILTER, function (json) {
+
+            console.log(json);
             const array = [];
 
             for (let i = 0, len = json.data; i < len; i++) {
@@ -21,6 +23,7 @@ function GetImageSrc(driveData) {
             driveData.setImageSrcs(array);
 
             callback();
+
         });
 
     }
