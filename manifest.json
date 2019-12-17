@@ -53,6 +53,7 @@
         "js/drive/image/createImgElement.js",
         "js/drive/image/createImg.js",
         "js/drive/image/viewImage.js",
+        "js/drive/image/getImageSrc.js",
         "js/drive/photoswipe/photoswipe-ui-default.min.js",
         "js/drive/photoswipe/photoswipe.min.js",
         "js/drive/photoswipe/initPhotoSwipe.js",

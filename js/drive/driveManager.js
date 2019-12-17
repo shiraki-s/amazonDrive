@@ -3,6 +3,7 @@ function DriveManager() {
 
     const driveData = new DriveData();
     const amazonAPI = new AmazonAPI();
+    const getImageSrc = new GetImageSrc(driveData);
     const driveImage = new DriveImage(driveData)
     const initPhotoSwipe = new InitPhotoSwipe(driveData);
     const viewBread = new ViewBread(driveData);
@@ -14,26 +15,32 @@ function DriveManager() {
     this.init = function () {
 
         initBread(function () {
-            initView();
-            footerManager.init();
 
-            const id = driveData.getNowDir();
+            getImageSrc.init(function () {
 
-            driveImage.getImages(id, function (json) {
-                driveData.addCash(id, json);
-                viewImage.view();
-                initPhotoSwipe.init('.imageContainer');
+                initView();
+                footerManager.init();
 
-                contextMenuManager.init(function (id) {
-                    refresh();
-                }, function () {
-                    refresh();
-                }, function () {
-                    refresh();
-                }, function () {
-                    refresh();
+                const id = driveData.getNowDir();
+
+                driveImage.getImages(id, function (json) {
+                    driveData.addCash(id, json);
+                    viewImage.view();
+                    initPhotoSwipe.init('.imageContainer');
+
+                    contextMenuManager.init(function (id) {
+                        refresh();
+                    }, function () {
+                        refresh();
+                    }, function () {
+                        refresh();
+                    }, function () {
+                        refresh();
+                    });
                 });
+
             });
+
 
         });
 
