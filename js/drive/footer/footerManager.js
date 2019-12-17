@@ -16,7 +16,7 @@ function FooterManager(driveData) {
 
     function initDom() {
 
-        const footer = document.createElement("footer");
+        const footer = document.createElement("div");
         footer.classList.add("footer-buttons")
 
         const button1 = document.createElement("button");
