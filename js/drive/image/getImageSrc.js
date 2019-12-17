@@ -11,7 +11,7 @@ function GetImageSrc(driveData) {
             console.log(json);
             const array = [];
 
-            for (let i = 0, len = json.data; i < len; i++) {
+            for (let i = 0, len = json.data.length; i < len; i++) {
 
                 const name = json.data[i].name;
                 const src = json.data[i].originalUrl;
