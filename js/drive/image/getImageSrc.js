@@ -8,6 +8,7 @@ function GetImageSrc(driveData) {
 
         driveImage.searchImages(FILTER, function (json) {
             console.log(json);
+            callback();
         });
 
     }
